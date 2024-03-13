@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.card{
+  height: 17rem !important;
+  width: 30%;
+  transition: 0.5s;
+ 
+}
+.card:hover{
+  transform: scale(1.1); 
+}
+.card1{
+  background-image: url("../public/createQuiz.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.9;
+  
+}
+.card2{
+  background-image: url("../public/myQuiz.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.card3{
+  background-image: url("../public/play_quiz.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
