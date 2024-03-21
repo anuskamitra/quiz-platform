@@ -41,3 +41,44 @@ code {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.singleQuizContainer{
+  margin:3rem 10rem ;
+  background-color: rgba(252, 230, 247, 0.3);
+}
+.quizCard{
+  background-color: rgb(252, 252, 252);
+}
+.qstnContainer{
+  position: fixed;
+  top:0;
+  bottom: 0;
+  right: 0;
+  left:0;
+  background-color:rgba(189,189,189,0.5);
+  display:flex
+}
+.your-div::-webkit-scrollbar {
+  width: 3px;
+}
+
+.your-div::-webkit-scrollbar-thumb {
+  background-color: hsl(0, 9%, 79%);
+}
+.body{
+  background-color: rgba(255, 255, 235,0.2);
+  position: fixed;
+  top:50%;
+  left: 50%;
+  width:85% ;
+  height:90% ; 
+  padding: 2rem;
+  border:3px solid rgb(255, 248, 248);
+  margin: 1rem;
+  overflow: auto;
+  transform: translate(-50%,-50%);
+  /* border-radius: 2%; */
+
+
+
+}

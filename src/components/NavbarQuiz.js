@@ -10,9 +10,9 @@ function NavbarQuiz() {
         <Container>
           <Navbar.Brand href="#home">QP</Navbar.Brand>
           <Nav className="ml-auto">
-          <Nav.Link as={Link} to="/" exact>Home</Nav.Link>
-            <Nav.Link >My Quiz</Nav.Link>
-            <Nav.Link >Play Quiz</Nav.Link>
+          <Nav.Link as={Link} to="/">Home</Nav.Link>
+            <Nav.Link as={Link} to="/myquiz">My Quiz</Nav.Link>
+            <Nav.Link as={Link} to="/play">Play Quiz</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
