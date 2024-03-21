@@ -1,13 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { useNavigate } from "react-router-dom";
+
 
 function ModalQuiz(props) {
-  const navigate=useNavigate()
-useEffect(()=>{
-  console.log("ModalQuiz")
-})
   // return (
   //   <Modal
   //     {...props}
@@ -78,11 +74,10 @@ useEffect(()=>{
         {props.buttons.map((button, index) => (
           <Button className={button.className} key={index} onClick={button.onClick}>{button.text}</Button>
         ))} 
+       
          </Modal.Body>
     </Modal>
   <div>
-    <h2>Hello</h2>
-  {console.log("hello")}
   </div>
   </div>
   )

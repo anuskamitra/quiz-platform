@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import Button from "react-bootstrap/Button";
+import React  from 'react'
+
 import Form from "react-bootstrap/Form";
 import FormGroup from "react-bootstrap/esm/FormGroup";
 import Col from "react-bootstrap/Col";
@@ -16,9 +16,7 @@ function SingleAnsQuiz(props) {
     list[props.questionNum-1][name]=value;
     props.setQuizList(list)
    }
-  //  useEffect(()=>{
-  //  console.log(props.quizList)
-  //  },[props.quizList])
+  
 
   return (
         <Form className=" w-75 mx-5">
@@ -39,7 +37,7 @@ function SingleAnsQuiz(props) {
           <div className="rounded shadow pt-4 mt-3 quizCard">
           <Form.Group>
             <FloatingLabel label="Add a Question"  className="mx-5">
-            <Form.Control type="text" name="question" placeholder="Type a question..." onChange={(e)=>handleChange(e)}
+            <Form.Control type="text" name="question" value={props.quizList[props.questionNum-1].question} placeholder="Type a question..." onChange={(e)=>handleChange(e)}
             />
             </FloatingLabel>
           </Form.Group>
@@ -54,10 +52,11 @@ function SingleAnsQuiz(props) {
                       name="correct"
                      value={props.quizList?.[props.questionNum-1]["optn1"]}
                       onChange={(e)=>handleChange(e)}
+                      checked={props.quizList?.[props.questionNum-1].correct===props.quizList[props.questionNum-1].optn1}
                     />
                   </div>
                   <FloatingLabel label="Option 1">
-                    <Form.Control type="text" onChange={(e)=>handleChange(e)} name="optn1"/>
+                    <Form.Control type="text" value={props.quizList[props.questionNum-1].optn1} onChange={(e)=>handleChange(e)} name="optn1"/>
                   </FloatingLabel>
                 </div>
               </Col>
@@ -69,12 +68,15 @@ function SingleAnsQuiz(props) {
                       type="radio"
                       id="optn2"
                       name="correct"
+                      checked={props.quizList?.[props.questionNum-1].correct===props.quizList[props.questionNum-1].optn2}
                      value={props.quizList?.[props.questionNum-1]["optn2"]}
                       onChange={(e)=>handleChange(e)}
+                   
+                      
                     />
                   </div>
                   <FloatingLabel label="Option 2">
-                    <Form.Control  type="text" id="optn2" name="optn2" onChange={(e)=>handleChange(e)}/>
+                    <Form.Control  type="text" id="optn2" name="optn2" value={props.quizList[props.questionNum-1].optn2} onChange={(e)=>handleChange(e)}/>
                   </FloatingLabel>
                 </div>
               </Col>
@@ -87,12 +89,13 @@ function SingleAnsQuiz(props) {
                       type="radio"
                       id="optn3"
                       name="correct"
+                       checked={props.quizList?.[props.questionNum-1].correct===props.quizList[props.questionNum-1].optn3}
                      value={props.quizList?.[props.questionNum-1]["optn3"]}
                       onChange={(e)=>handleChange(e)}
                     />
                   </div>
                   <FloatingLabel label=" Option 3">
-                    <Form.Control type="text" onChange={(e)=>handleChange(e)} name="optn3" />
+                    <Form.Control type="text" value={props.quizList[props.questionNum-1].optn3} onChange={(e)=>handleChange(e)} name="optn3" />
                   </FloatingLabel>
                 </div>
               </Col>
@@ -103,12 +106,12 @@ function SingleAnsQuiz(props) {
                       type="radio"
                       id="optn4"
                       name="correct"
-                     value={props.quizList?.[props.questionNum-1]["optn4"]}
+                     checked={props.quizList?.[props.questionNum-1].correct===props.quizList[props.questionNum-1].optn4}
                       onChange={(e)=>handleChange(e)}
                     />
                   </div>
                   <FloatingLabel label="Option 4">
-                    <Form.Control type="text" onChange={(e)=>handleChange(e)} name="optn4" />
+                    <Form.Control type="text"  value={props.quizList[props.questionNum-1].optn4} onChange={(e)=>handleChange(e)} name="optn4" />
                   </FloatingLabel>
                 </div>
               </Col>

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 function ViewQuestions(props) {
     const navigate=useNavigate();
     const closeCard=()=>{
-        props.setShowQstn(false)
+        props.setShowEditPage?.(false)
         navigate("/myquiz");
     }
 
