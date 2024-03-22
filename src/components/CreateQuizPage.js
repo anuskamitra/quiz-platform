@@ -69,13 +69,18 @@ function CreateQuizPage(props) {
     localStorage.setItem("question", JSON.stringify(storedData));
     setQstnStored(true);
   };
-
+const handleUpdateStore=()=>{
+  let storedData = JSON.parse(localStorage.getItem("question"));
+  storedData[props.showEditIndex].quizList=quizList;
+  localStorage.setItem("question", JSON.stringify(storedData));
+  setQstnStored(true);
+}
   const handleShowAll = () => {
     setShowQstn(true);
   };
 
   useEffect(() => {
-   
+   console.log(props)
     if(props?.quiz){
       setQuizList(props.quiz.quizList);
       setQuizTitle(props.quiz.title)
@@ -123,7 +128,17 @@ function CreateQuizPage(props) {
                 Add
               </Button>
               <hr className="bg-dark text-danger" />
-              <Button
+             {props.showEditPage?
+             <Button
+             className="mt-4 d-flex "
+             variant="primary"
+             type="submit"
+             onClick={()=>handleUpdateStore()}
+           >
+             Update
+           </Button>
+             :
+             <Button
                 className="mt-4 d-flex "
                 variant="primary"
                 type="submit"
@@ -131,6 +146,7 @@ function CreateQuizPage(props) {
               >
                 Submit
               </Button>
+             } 
               {qstnStored && (
                 <ModalQuiz
                   show={qstnStored}

@@ -78,7 +78,70 @@ code {
   overflow: auto;
   transform: translate(-50%,-50%);
   /* border-radius: 2%; */
+}
 
-
-
+.catagoryListCard{
+    background:rgb(178, 233, 143);
+    height: 5rem;
+    width: 20rem;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: larger;
+    border-radius: 1rem;
+    
+}
+.catagoryDiv{
+  background: rgb(231, 235, 231);
+  width: fit-content;
+  padding: 2rem 5rem;
+  margin: 3rem auto;
+  border-radius: 1rem;
+  /* overflow: scroll; */
+ 
+}
+.quizCard{
+  background:rgb(178, 233, 143);
+ /* background-color:  rgb(190, 240, 166); */
+  width: 30% ;
+  margin:3rem auto;
+  padding: 1rem 1rem;
+  border-radius: 0.6rem;
+}
+.quizCard h5{
+  padding: 0.4rem 0.5rem;
+  font-size: 1.1rem;
+}
+.optionDiv{
+  background-color: rgb(255, 255, 255);
+  padding: 0.2rem 1rem;
+  cursor: pointer;
+  margin :1rem 0;
+  border: 2px solid rgb(254, 254, 254) ;
+  border-radius: 0.7rem;
+}
+.optionDiv:hover{
+  /* background-color: rgb(190, 240, 166); */
+  background:rgb(178, 233, 143);
+}
+.qButton{
+ background-color: rgb(134, 133, 133);
+ padding:0.3rem 1.5rem ;
+ color:white;
+ border: none;
+ font-weight: 600;
+ box-shadow: 2px 2px 2px 2px rgba(120, 119, 119, 0.5);
+ border-radius: 0.5rem;
+ cursor: pointer;
+}
+.ansDiv{
+  background-color: rgb(157, 211, 130);
+  color:white
+}
+.qButton:hover{
+  background-color: rgb(101, 102, 101);
+  
+}
+.qButton:disabled{
+  background-color: rgb(181, 181, 181);
+  
 }

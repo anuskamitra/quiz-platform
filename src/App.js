@@ -10,7 +10,7 @@ import PlayQuiz from "./components/PlayQuiz";
 
 function App() {
   return ( 
-    <div className="App">
+    <div >
        <Router>
       <NavbarQuiz />
         <Routes>

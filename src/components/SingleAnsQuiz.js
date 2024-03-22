@@ -20,21 +20,10 @@ function SingleAnsQuiz(props) {
 
   return (
         <Form className=" w-75 mx-5">
-            {/* <Form.Group className="mb-3">
-              <FloatingLabel label="Add a Description"> 
-              <Form.Control
-                as="textarea"
-                rows={2}
-                placeholder="Add a Description"
-              />
-              </FloatingLabel>
-            </Form.Group> */}
-          {/* </div> */}
           <br/>
-          
           <h6 className="d-flex justify-content-end text-danger">Question {props.questionNum}</h6>
 
-          <div className="rounded shadow pt-4 mt-3 quizCard">
+          <div className="rounded shadow pt-4 mt-3 ">
           <Form.Group>
             <FloatingLabel label="Add a Question"  className="mx-5">
             <Form.Control type="text" name="question" value={props.quizList[props.questionNum-1].question} placeholder="Type a question..." onChange={(e)=>handleChange(e)}
@@ -50,9 +39,9 @@ function SingleAnsQuiz(props) {
                       type="radio"
                       id="optn1"
                       name="correct"
-                     value={props.quizList?.[props.questionNum-1]["optn1"]}
+                     value="1"
                       onChange={(e)=>handleChange(e)}
-                      checked={props.quizList?.[props.questionNum-1].correct===props.quizList[props.questionNum-1].optn1}
+                      checked={props.quizList?.[props.questionNum-1].correct==="1"}
                     />
                   </div>
                   <FloatingLabel label="Option 1">
@@ -68,8 +57,9 @@ function SingleAnsQuiz(props) {
                       type="radio"
                       id="optn2"
                       name="correct"
-                      checked={props.quizList?.[props.questionNum-1].correct===props.quizList[props.questionNum-1].optn2}
-                     value={props.quizList?.[props.questionNum-1]["optn2"]}
+                      checked={props.quizList?.[props.questionNum-1].correct==="2"}
+                      value="2"
+                    //  value={props.quizList?.[props.questionNum-1]["optn2"]}
                       onChange={(e)=>handleChange(e)}
                    
                       
@@ -89,8 +79,9 @@ function SingleAnsQuiz(props) {
                       type="radio"
                       id="optn3"
                       name="correct"
-                       checked={props.quizList?.[props.questionNum-1].correct===props.quizList[props.questionNum-1].optn3}
-                     value={props.quizList?.[props.questionNum-1]["optn3"]}
+                      //  checked={props.quizList?.[props.questionNum-1].correct===props.quizList[props.questionNum-1].optn3}
+                      checked={props.quizList?.[props.questionNum-1].correct==="3"}
+                     value="3"
                       onChange={(e)=>handleChange(e)}
                     />
                   </div>
@@ -106,7 +97,8 @@ function SingleAnsQuiz(props) {
                       type="radio"
                       id="optn4"
                       name="correct"
-                     checked={props.quizList?.[props.questionNum-1].correct===props.quizList[props.questionNum-1].optn4}
+                      value="4"
+                     checked={props.quizList?.[props.questionNum-1].correct==="4"}
                       onChange={(e)=>handleChange(e)}
                     />
                   </div>

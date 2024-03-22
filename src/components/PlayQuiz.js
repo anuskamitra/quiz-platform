@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
+import Col from 'react-bootstrap/Col';
+import { Card } from "react-bootstrap";
+import Row from 'react-bootstrap/Row';
 
 function PlayQuiz() {
   const [quizList, setQuizList] = useState([]);
@@ -11,6 +14,7 @@ function PlayQuiz() {
   const[score,setScore]=useState([]);
   const [result,setResult]=useState(0);
   const [showResult,setShowResult]=useState(false);
+  const [error,setError]=useState("");
 
   const handlequizList = () => {
     setQuizList(JSON.parse(localStorage.getItem("question")));
@@ -18,12 +22,17 @@ function PlayQuiz() {
 
   const handlePlayerName = (e) => {
     e.preventDefault();
-    console.log(playerName);
-    setPlayQuiz(true);
-    console.log(quizList);
-    console.log(chosenCatagoryIndex);
-    console.log(quizArray)
 
+    let err=false;
+    if(playerName.length<5 || playerName.length>20){
+      setError("Player name should be in 5 to 20 characters!");
+      err=true;
+
+    }
+    if(!err){
+      setError(false)
+      setPlayQuiz(true);
+    }
   };
   const handleChosenCatagoryIndex = (i) => {
     setChosenCatagoryIndex(i);
@@ -77,43 +86,58 @@ function PlayQuiz() {
   return (
     <div>
         {showResult && <h2>Congratulation! you got {result} out of {quizArray.length*5}</h2>}
-      <h2>Wellcome to QuizPlatform</h2>
+      {/* <h2>Wellcome to QuizPlatform</h2> */}
       {!playQuiz ? (
         chosenCatagoryIndex == -1 ? (
-          <>
-            <h3>Available Catagories</h3>
-            {quizList.map((item, index) => (
-              <h6
-                key={item.title}
-                onClick={() => handleChosenCatagoryIndex(index)}
+          <div className="catagoryDiv">
+            <h3 className="text-muted">Available Catagories</h3>
+            <p className="text-muted">Choose one to play</p>
+            <div >
+            {quizList.map((item, index) => {return (
+            item.activate===true &&  <div className="m-5 d-flex justify-content-center"
+                key={item.title}   
               >
-                {item.title}
-              </h6>
-            ))}
-          </>
+               <div className="shadow catagoryListCard d-flex justify-content-center align-items-center " onClick={() => handleChosenCatagoryIndex(index)} > <p>{item.title}</p></div> 
+              </div>
+           ) })}
+           </div>
+          </div>
         ) : (
-          <Form className="shadow">
-            <h3>{quizList[chosenCatagoryIndex].title}</h3>
-            <input
+          <div className="w-75 catagoryDiv d-flex flex-column">
+             <h3 className="text-muted">Selected Catagory: {quizList[chosenCatagoryIndex].title}</h3>
+             <p>Hello Wellcome to this quiz app, it will enhance your general knowledge on several topic</p>
+          <Form className="w-50 m-auto">
+            <Form.Label>Enter your Name:</Form.Label>
+            <Form.Control
               type="text"
               value={playerName}
               onChange={(event) => setPlayerName(event.target.value)}
             />
-            <button className="btn btn-primary" onClick={handlePlayerName}>
+            <div>
+              {error && <h6 className=" mt-2 text-danger">{error}</h6>}
+              <button className="btn btn-primary my-2" onClick={handlePlayerName}>
               Start Quiz
-            </button>
+            </button></div>
           </Form>
+          </div>
         )
       ) : (
-        <>
+        <div className="quizCard">
+          <div className="d-flex justify-content-between m-0 mb-3 text-muted">
+          <h6>{quizList[chosenCatagoryIndex].title}</h6>
+          <h6>{currentIndex+1} / {quizArray.length}</h6>
+          </div>
+        
           <h5 >{quizArray[currentIndex].question}</h5>
-         <h6 className=" "> <button className="btn btn-dark px-5" onClick={()=>handleScore(quizArray[currentIndex].optn1,currentIndex)}>{quizArray[currentIndex].optn1}</button></h6>
-          <h6><button onClick={()=>handleScore(quizArray[currentIndex].optn2,currentIndex)}>{quizArray[currentIndex].optn2}</button></h6>
-          <h6><button onClick={()=>handleScore(quizArray[currentIndex].optn3,currentIndex)}>{quizArray[currentIndex].optn3}</button></h6>
-          <h6><button onClick={()=>handleScore(quizArray[currentIndex].optn4,currentIndex)}>{quizArray[currentIndex].optn4}</button></h6>
-          <button onClick={handlePrev} disabled={currentIndex==0}>Prev</button>
-          {currentIndex==quizArray.length-1?<button onClick={handleSubmit}>Submit</button>:<button onClick={handleNext}>Next</button>}
-        </>
+        <div className={`optionDiv {$}`}> <h6  onClick={()=>handleScore(quizArray[currentIndex].optn1,currentIndex)}>{quizArray[currentIndex].optn1}</h6></div>
+        <div className="optionDiv"><h6 onClick={()=>handleScore(quizArray[currentIndex].optn2,currentIndex)}>{quizArray[currentIndex].optn2}</h6></div> 
+        <div className="optionDiv" ><h6  onClick={()=>handleScore(quizArray[currentIndex].optn3,currentIndex)}>{quizArray[currentIndex].optn3}</h6></div>
+         <div  className="optionDiv" ><h6 onClick={()=>handleScore(quizArray[currentIndex].optn4,currentIndex)}>{quizArray[currentIndex].optn4}</h6></div>
+         <div className="d-flex justify-content-between mt-4 mx-2">
+          <button className="qButton" onClick={handlePrev} disabled={currentIndex==0}>Prev</button>
+          {currentIndex==quizArray.length-1?<button className="qButton" onClick={handleSubmit}>Submit</button>:<button className="qButton" onClick={handleNext}>Next</button>}
+          </div>
+        </div>
       )}
     </div>
   );

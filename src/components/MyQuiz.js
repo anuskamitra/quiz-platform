@@ -14,6 +14,7 @@ function MyQuiz() {
   const [confirmModal, setConfirmModal] = useState(false);
   const [questionToView, setQuestionToView] = useState([]);
   const [showEditPage, setShowEditPage] = useState(false);
+  const [showEditIndex,setShowEditIndex]=useState(-1);
   const [editQuiz, setEditQuiz] = useState("");
   const [activate,setActivate]=useState(true);
   
@@ -48,15 +49,24 @@ function MyQuiz() {
   const handleEditQuiz = (quiz, index) => {
     setEditQuiz(quiz);
     setShowEditPage(true);
+    setShowEditIndex(index)
+    console.log(index)
   };
+  const handleAnctivation=(index)=>{
+    setActivate(!activate)
+    console.log(index);
+    console.log(quizList[index])
+    quizList[index].activate= !quizList[index].activate;
+    localStorage.setItem('question', JSON.stringify(quizList));
 
+  }
   useEffect(() => {
     handlequizList();
-},[showEditPage]);
+},[showEditPage,activate]);
   return (
     <div className=" w-75 m-auto">
       {showEditPage ? (
-        <CreateQuizPage quiz={editQuiz} setShowEditPage={setShowEditPage} />
+        <CreateQuizPage quiz={editQuiz} setShowEditPage={setShowEditPage} showEditPage={showEditPage} showEditIndex={showEditIndex}/>
       ) : (
         <>
           {showQuestionList && (
@@ -95,8 +105,8 @@ function MyQuiz() {
                   <td>{quizItem.title}</td>
                   <td>
                     {" "}
-                    <button type="button" onClick={()=>setActivate(false)} className="btn btn-outline-secondary">
-                      Deactive
+                    <button type="button" onClick={()=>handleAnctivation(index)} className="btn btn-outline-secondary">
+                     {quizItem.activate===true?"Deactivate":"Activate"}
                     </button>
                   </td>
                   <td>{quizItem.createdAt}</td>
@@ -104,7 +114,7 @@ function MyQuiz() {
                     {" "}
                     <button
                       className="btn"
-                      onClick={() => handleEditQuiz(quizItem)}
+                      onClick={() => handleEditQuiz(quizItem,index)}
                     >
                       <MdOutlineEdit className="text-primary" />
                     </button>
