@@ -7,6 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -82,7 +83,8 @@ code {
 
 .catagoryListCard{
     background:rgb(178, 233, 143);
-    height: 5rem;
+    /* height: 5rem; */
+    padding: 0.7rem 0;
     width: 20rem;
     cursor: pointer;
     font-weight: 700;
@@ -144,4 +146,50 @@ code {
 .qButton:disabled{
   background-color: rgb(181, 181, 181);
   
+}
+.resultDiv{
+  background:rgb(178, 233, 143);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 53%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1rem;
+  width: 30%;
+  border-radius: 1rem;
+  color:rgb(255, 255, 255);
+  flex-direction: column;
+}
+
+.csv img{
+  height: 13rem;
+}
+
+.enterNameCard{
+  background:rgb(178, 233, 143);
+  padding: 2rem 2rem;
+  width: 20rem;
+  border-radius: 1rem;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  width: 60%;
+  
+}
+.navbar{
+  background: rgb(231, 235, 231);
+  
+}
+.startQuizImage img{
+  height: 13rem;
+}
+.nameForm{
+  border:2px rgb(119, 117, 117) solid;
+  padding: 0rem 2rem;
+  border-radius: 1rem;
+  width: 50%;
+
 }

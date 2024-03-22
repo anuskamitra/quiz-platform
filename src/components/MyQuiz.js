@@ -6,6 +6,8 @@ import ModalQuiz from "./ModalQuiz";
 import { GrFormView } from "react-icons/gr";
 import ViewQuestions from "./ViewQuestions";
 import CreateQuizPage from "./CreateQuizPage";
+import { useNavigate } from "react-router-dom";
+import {Switch} from "antd"
 
 function MyQuiz() {
   const [quizList, setQuizList] = useState([]);
@@ -17,6 +19,7 @@ function MyQuiz() {
   const [showEditIndex,setShowEditIndex]=useState(-1);
   const [editQuiz, setEditQuiz] = useState("");
   const [activate,setActivate]=useState(true);
+  const navigate=useNavigate()
   
   const buttons = [
     {
@@ -86,11 +89,11 @@ function MyQuiz() {
           )}
           <div className=" my-5 d-flex justify-content-between">
             <h2>My Quizes</h2>
-            <button className="btn btn-primary px-3">Create New Quiz</button>
+            <button className="qButton" onClick={()=>navigate("/createquiz")}>Create New Quiz</button>
           </div>
-          <Table className="my-5 shadow border">
+          <Table className="my-5 shadow border text-center">
             <thead className="">
-              <tr className="border ">
+              <tr className="border">
                 <th>Quiz No.</th>
                 <th>Title</th>
                 <th>Status</th>
@@ -105,9 +108,7 @@ function MyQuiz() {
                   <td>{quizItem.title}</td>
                   <td>
                     {" "}
-                    <button type="button" onClick={()=>handleAnctivation(index)} className="btn btn-outline-secondary">
-                     {quizItem.activate===true?"Deactivate":"Activate"}
-                    </button>
+                    <Switch onClick={()=>handleAnctivation(index)} defaultChecked={quizItem.activate} />
                   </td>
                   <td>{quizItem.createdAt}</td>
                   <td>

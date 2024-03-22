@@ -6,7 +6,7 @@ import  {Link}  from 'react-router-dom';
 function NavbarQuiz() {
   return (
    <div>
-    <Navbar bg="dark" data-bs-theme="dark">
+    <Navbar  className='navbar'>
         <Container>
           <Navbar.Brand href="#home">QP</Navbar.Brand>
           <Nav className="ml-auto">
