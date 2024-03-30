@@ -63,7 +63,7 @@ function ModalQuiz(props) {
       {...props}
       // size="md"
       aria-labelledby="contained-modal-title-vcenter"
-      // centered
+      //  centered
     >
       <Modal.Header closeButton>
         <Modal.Title className="text-muted" id="contained-modal-title-vcenter">
@@ -72,7 +72,7 @@ function ModalQuiz(props) {
       </Modal.Header>
       <Modal.Body>
         {props.buttons.map((button, index) => (
-          <Button className={button.className} key={index} onClick={button.onClick}>{button.text}</Button>
+          <Button className={`${button.className} m-1` } key={index} onClick={button.onClick}>{button.text}</Button>
         ))} 
        
          </Modal.Body>

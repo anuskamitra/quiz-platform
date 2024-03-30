@@ -7,12 +7,14 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MyQuiz from "./components/MyQuiz";
 import PlayQuiz from "./components/PlayQuiz";
+import { useState } from "react";
 
 function App() {
+  const[playerName,setPlayerName]=useState("");
   return ( 
     <div >
        <Router>
-      <NavbarQuiz />
+      <NavbarQuiz playerName={playerName}/>
         <Routes>
           <Route path='/' exact element={ <Home /> }> 
           </Route>
@@ -20,11 +22,9 @@ function App() {
           </Route>
           <Route path='/createquiz' element={<CreateQuizPage />}>
           </Route>
-          <Route path='/play' element={<PlayQuiz />}>
+          <Route path='/play' element={<PlayQuiz setPlayerName={setPlayerName} playerName={playerName}/>}>
           </Route>
         </Routes>
-     
-     
       </Router>
     </div>
   );

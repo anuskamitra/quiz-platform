@@ -1,6 +1,9 @@
 import React from 'react'
 import Card from './Card'
 import { useNavigate } from 'react-router-dom'
+import StartQuizSVG from "./startQuiz.svg";
+import QuizListSVG from "./quizList.svg"
+import PlayQuiz from "./playQuiz.svg"
 
 function Home() {
     const navigate=useNavigate();
@@ -15,10 +18,10 @@ function Home() {
       navigate("/play")
     }
   return (
-    <div className='d-flex justify-content-center mt-4'>
-    <Card title="Create New Quiz" onClick={handleCreateQuiz} className="card1"/>
-    <Card title="My Quiz"  onClick={handleMyQuiz}  className="card2"/>
-    <Card title="Play Quiz" onClick={handlePlayQuiz} className="card3"/>
+    <div className="home">
+    <Card title="Create New Quiz" onClick={handleCreateQuiz} className="card1" src={StartQuizSVG}/>
+    <Card title="My Quiz List"  onClick={handleMyQuiz}  className="card2" src={QuizListSVG}/>
+    <Card title="Play Quiz" onClick={handlePlayQuiz} className="card3" src={PlayQuiz}/>
     </div>
   )
 }

@@ -13,52 +13,61 @@ code {
     monospace;
 }
 
-.card{
-  height: 17rem !important;
-  width: 30%;
-  transition: 0.5s;
- 
-}
-.card:hover{
-  transform: scale(1.1); 
-}
-.card1{
-  background-image: url("../public/createQuiz.jpeg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  opacity: 0.9;
-  
-}
-.card2{
-  background-image: url("../public/myQuiz.jpeg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-.card3{
-  background-image: url("../public/play_quiz.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+.home {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2rem;
+
 }
 
-.singleQuizContainer{
-  margin:3rem 10rem ;
-  background-color: rgba(252, 230, 247, 0.3);
+.homeCard {
+  height: 18rem !important;
+  width: 30vw;
+  transition: 0.5s;
+  background: rgb(193, 239, 165) !important;
+  border: 2px solid rgb(197, 195, 195) !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: 0.6rem;
+
 }
-.quizCard{
+
+.homeCard img {
+  height: 65%;
+  width: 100%;
+
+}
+
+.homeCard:hover {
+  transform: scale(1.1);
+}
+
+.singleQuizContainer {
+  margin: 3rem auto;
+  background: rgb(231, 235, 231);
+  width: 65%;
+  box-shadow: 2px 2px 2px 2px rgb(223, 221, 221);
+
+}
+
+.quizCard {
   background-color: rgb(252, 252, 252);
 }
-.qstnContainer{
+
+.qstnContainer {
   position: fixed;
-  top:0;
+  top: 0;
   bottom: 0;
   right: 0;
-  left:0;
-  background-color:rgba(189,189,189,0.5);
-  display:flex
+  left: 0;
+  background-color: rgb(212, 208, 208);
+  display: flex
 }
+
 .your-div::-webkit-scrollbar {
   width: 3px;
 }
@@ -66,130 +75,357 @@ code {
 .your-div::-webkit-scrollbar-thumb {
   background-color: hsl(0, 9%, 79%);
 }
-.body{
-  background-color: rgba(255, 255, 235,0.2);
-  position: fixed;
-  top:50%;
+
+.body {
+  background: rgb(194, 241, 164);
+ position: fixed;
+  top: 50%;
   left: 50%;
-  width:85% ;
-  height:90% ; 
+  width: 85%;
   padding: 2rem;
-  border:3px solid rgb(255, 248, 248);
-  margin: 1rem;
+   margin:auto;
   overflow: auto;
-  transform: translate(-50%,-50%);
-  /* border-radius: 2%; */
+  transform: translate(-50%, -50%);
+  color:rgb(94, 92, 92)
+
 }
 
-.catagoryListCard{
-    background:rgb(178, 233, 143);
-    /* height: 5rem; */
-    padding: 0.7rem 0;
-    width: 20rem;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: larger;
-    border-radius: 1rem;
-    
+.pointer{
+  cursor: pointer;
 }
-.catagoryDiv{
-  background: rgb(231, 235, 231);
-  width: fit-content;
-  padding: 2rem 5rem;
-  margin: 3rem auto;
+
+.catagoryListCard {
+  background: rgb(178, 233, 143);
+  padding: 0.7rem 0;
+  width: 20rem;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: larger;
   border-radius: 1rem;
-  /* overflow: scroll; */
- 
+  display: flex;
+  justify-content: center;
 }
-.quizCard{
-  background:rgb(178, 233, 143);
- /* background-color:  rgb(190, 240, 166); */
-  width: 30% ;
-  margin:3rem auto;
+
+.catagoryDiv {
+  background: rgb(231, 235, 231);
+  width: 50%;
+  padding: 2rem 1rem;
+  margin: 6rem auto ;
+  border-radius: 1rem;
+
+}
+
+.quizCard {
+  background: rgb(178, 233, 143);
+  width: 30%;
+  margin: 2rem auto;
   padding: 1rem 1rem;
   border-radius: 0.6rem;
 }
-.quizCard h5{
+
+.quizCard h5 {
   padding: 0.4rem 0.5rem;
   font-size: 1.1rem;
 }
-.optionDiv{
+
+.optionDiv {
   background-color: rgb(255, 255, 255);
   padding: 0.2rem 1rem;
   cursor: pointer;
-  margin :1rem 0;
-  border: 2px solid rgb(254, 254, 254) ;
+  margin: 1rem 0;
+  border: 2px solid rgb(254, 254, 254);
   border-radius: 0.7rem;
 }
-.optionDiv:hover{
-  /* background-color: rgb(190, 240, 166); */
-  background:rgb(178, 233, 143);
+
+.optionDiv:hover {
+  background: rgb(178, 233, 143);
 }
-.qButton{
- background-color: rgb(134, 133, 133);
- padding:0.3rem 1.5rem ;
- color:white;
- border: none;
- font-weight: 600;
- box-shadow: 2px 2px 2px 2px rgba(120, 119, 119, 0.5);
- border-radius: 0.5rem;
- cursor: pointer;
+
+.qButton {
+  background-color: rgb(134, 133, 133);
+  padding: 0.3rem 1.5rem;
+  color: white;
+  border: none;
+  font-weight: 600;
+  box-shadow: 2px 2px 2px 2px rgba(120, 119, 119, 0.5);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  margin: 1rem 0rem;
 }
-.ansDiv{
+
+.ansDiv {
   background-color: rgb(157, 211, 130);
-  color:white
+  color: white
 }
-.qButton:hover{
+
+.qButton:hover {
   background-color: rgb(101, 102, 101);
-  
+
 }
-.qButton:disabled{
+
+.qButton:disabled {
   background-color: rgb(181, 181, 181);
-  
+
 }
-.resultDiv{
-  background:rgb(178, 233, 143);
+
+.resultDiv {
+  background: rgb(178, 233, 143);
+  padding: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  top: 53%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 1rem;
-  width: 30%;
+  width: 40%;
   border-radius: 1rem;
-  color:rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
   flex-direction: column;
+  background: rgb(194, 241, 164);
+  position: fixed;
+   top: 50%;
+   left: 50%;
+   /* width: 85%;
+   padding: 2rem;
+    margin:auto;
+   overflow: auto; */
+   transform: translate(-50%, -50%);
+   color:rgb(94, 92, 92)
 }
 
-.csv img{
+.csv img {
   height: 13rem;
 }
 
-.enterNameCard{
-  background:rgb(178, 233, 143);
+.enterNameCard {
+  background: rgb(178, 233, 143);
   padding: 2rem 2rem;
-  width: 20rem;
   border-radius: 1rem;
-  position: absolute;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
-  width: 60%;
+  margin: 4rem auto 1rem auto ;
+  width:65% ;
   
 }
-.navbar{
+
+.enterNameCard img{
+  width: 90%;
+  height:100%
+}
+.nameContainer{
+  display: flex;
+  justify-content: space-between;
+}
+.navbar {
   background: rgb(231, 235, 231);
-  
+  position: sticky;
+  top: 0
 }
-.startQuizImage img{
-  height: 13rem;
+
+.startQuizImage {
+  width: 50%;
 }
-.nameForm{
-  border:2px rgb(119, 117, 117) solid;
-  padding: 0rem 2rem;
+
+
+.nameForm {
+  /* border: 2px rgb(119, 117, 117) solid; */
+  margin-top: 1rem;
+  padding: 1rem 1rem;
   border-radius: 1rem;
   width: 50%;
+  margin-left:1rem;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+}
+.myQuizTableContainer{ 
+  overflow-x: auto;
+  width: 75%;
+  margin: auto;
+ 
 
+ }
+.myQuizTable{
+ text-align: center;
+border-collapse: collapse;
+border-spacing: 0;
+min-width: 600px;
+box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+margin-top: 2rem;
+}
+
+.myQuizHeader h2{
+  margin: 1rem 0;
+
+}
+
+.myQuizHeader{
+  display: flex;
+  justify-content: space-between;
+  width: 75%;
+  margin: auto;
+  margin-top: 2rem;
+}
+
+
+
+.myQuizTable th,
+td {
+  background: rgb(195, 241, 166) !important;
+  color: rgb(138, 135, 135) !important;
+
+
+}
+
+.myQuizTable th {
+  border-bottom: 1px solid rgb(251, 246, 246) !important;
+}
+
+.singleQuizCard {
+  background: rgb(195, 241, 166) ;
+  color: rgb(117, 115, 115);
+  padding: 1rem;
+  margin: auto 5rem;
+}
+
+.createQuizButton {
+  margin-top: 3%;
+  background-color: rgb(195, 241, 166);
+  padding: 0.3rem 1.5rem;
+  border: none;
+  font-weight: 600;
+  box-shadow: 2px 2px 2px 2px rgba(120, 119, 119, 0.5);
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+.playQuizText{
+  display:flex;
+  justify-content: end; 
+  padding-top: 1rem;
+}
+.icon {
+  vertical-align: middle;
+  margin: 0.2rem ;
+}
+.createQuizButton:hover {
+  background-color: rgb(101, 102, 101);
+
+}
+.optionContainer{
+  display: grid;
+  grid-template-columns: auto auto ;
+}
+.optionRow{
+  padding: 5%;
+
+}
+.deleteButton{
+   cursor: pointer;
+}
+.errorCard{
+  border: 2px solid rgb(237, 127, 127)!important;
+  box-shadow: rgba(237, 86, 11, 0.7) 0px 2px 10px;
+  
+}
+.inputControlError{
+  border: 2px solid rgb(232, 132, 132) !important;
+ 
+  
+}
+.cross{
+  position: fixed;
+  top:0;
+  right:0;
+  padding: 1rem;
+}
+@media screen and (max-width: 860px) {
+  .enterNameCard{
+    width: 90%;
+  }
+  .quizCard{
+    width: 60%;
+  }
+  .resultDiv {
+    width: 60%;
+  }
+  .singleQuizContainer {
+    width: 90%
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .home {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    margin-top: 2rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .homeCard {
+    width: 85%;
+    margin: 1rem;
+  }
+  .catagoryDiv {
+    width: 90%;
+    padding: 2rem 0rem;
+    margin: 3rem auto;
+    border-radius: 1rem;
+  }
+  .enterNameCard{
+    width: 80%;
+  }
+  .nameContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .nameForm{
+    width: 100%;
+    border: none;
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  .startQuizButtonDiv{
+    margin: 1rem;
+    text-align: center;
+  }
+  .quizCard{
+    width: 80%;
+  }
+  .resultDiv {
+    width: 80%;
+  }
+  .singleQuizCard{
+    width: 100%;
+    margin: 0;
+    
+  }
+  .myQuizHeader{
+    width: 90%;
+    margin-bottom: 2rem;
+  }
+  .myQuizTableContainer{
+    width: 90%;
+  }
+  .myQuizContainer{
+    background: rgb(231, 235, 231) ;
+    width: 95%;
+    padding: 1rem 0rem;
+    margin: 6rem auto ;
+    border-radius: 1rem;
+    box-shadow: 2px 2px 2px rgba(120, 119, 119, 0.5) ;
+
+  }
+  
+  .viewQuestionList{
+    padding: 0.5rem;
+    display:flex;
+    flex-direction:column;
+    margin-left: 2rem;
+  }
+  .optionContainer{
+    display: grid;
+    grid-template-columns: auto ;
+  }   
+  
 }

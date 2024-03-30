@@ -1,121 +1,141 @@
-import React  from 'react'
-
+import React, { useState,useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import FormGroup from "react-bootstrap/esm/FormGroup";
-import Col from "react-bootstrap/Col";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
-import Row from "react-bootstrap/Row";
-
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import { brown,red,green } from '@mui/material/colors';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 function SingleAnsQuiz(props) {
 
+  const [optionButtonDisabled,setOptionButtonDisabled]=useState(false);
+ 
+  const handleOptionChange = (e) => {
+    props.setFillAllOption(false)
+    let tempErr=[...props.error];
+    tempErr[props.questionNum - 1]={};
+    props.setError(tempErr);
+    const { name, value } = e.target;
+    const list = [...props.quizList];
+    list[props.questionNum - 1].options[name-1] = value;
+    props.setQuizList(list);
+  };
+   
   const handleChange=(e)=>{
-    const {name,value}=e.target;
-    const list=[...props.quizList]
-    list[props.questionNum-1][name]=value;
-    props.setQuizList(list)
-   }
-  
+    props.setFillAllOption(false)
+    let tempErr=[...props.error];
+    tempErr[props.questionNum - 1]={};
+    props.setError(tempErr);
+    const { name, value } = e.target;
+    console.log(name+'  '+value)
+    const list = [...props.quizList];
+    list[props.questionNum - 1][name] = value;
+    props.setQuizList(list);
+    console.log(props.quizList)
+  }
 
-  return (
-        <Form className=" w-75 mx-5">
-          <br/>
-          <h6 className="d-flex justify-content-end text-danger">Question {props.questionNum}</h6>
-
-          <div className="rounded shadow pt-4 mt-3 ">
-          <Form.Group>
-            <FloatingLabel label="Add a Question"  className="mx-5">
-            <Form.Control type="text" name="question" value={props.quizList[props.questionNum-1].question} placeholder="Type a question..." onChange={(e)=>handleChange(e)}
-            />
-            </FloatingLabel>
-          </Form.Group>
-          <FormGroup> 
-            <Row className="g-2">
-              <Col md className="m-5 mt-4 mb-0">
-                <div className="d-flex align-items-center">
-                  <div className="m-3">
-                    <input
-                      type="radio"
-                      id="optn1"
-                      name="correct"
-                     value="1"
-                      onChange={(e)=>handleChange(e)}
-                      checked={props.quizList?.[props.questionNum-1].correct==="1"}
-                    />
-                  </div>
-                  <FloatingLabel label="Option 1">
-                    <Form.Control type="text" value={props.quizList[props.questionNum-1].optn1} onChange={(e)=>handleChange(e)} name="optn1"/>
-                  </FloatingLabel>
-                </div>
-              </Col>
-
-              <Col md className="m-5 mt-4 mb-0 ">
-                <div className="d-flex align-items-center">
-                  <div className="m-3">
-                    <input
-                      type="radio"
-                      id="optn2"
-                      name="correct"
-                      checked={props.quizList?.[props.questionNum-1].correct==="2"}
-                      value="2"
-                    //  value={props.quizList?.[props.questionNum-1]["optn2"]}
-                      onChange={(e)=>handleChange(e)}
-                   
-                      
-                    />
-                  </div>
-                  <FloatingLabel label="Option 2">
-                    <Form.Control  type="text" id="optn2" name="optn2" value={props.quizList[props.questionNum-1].optn2} onChange={(e)=>handleChange(e)}/>
-                  </FloatingLabel>
-                </div>
-              </Col>
-            </Row>
-            <Row className="g-2">
-              <Col md className="m-5 mt-4">
-                <div className="d-flex align-items-center">
-                  <div className="m-3">
-                    <input
-                      type="radio"
-                      id="optn3"
-                      name="correct"
-                      //  checked={props.quizList?.[props.questionNum-1].correct===props.quizList[props.questionNum-1].optn3}
-                      checked={props.quizList?.[props.questionNum-1].correct==="3"}
-                     value="3"
-                      onChange={(e)=>handleChange(e)}
-                    />
-                  </div>
-                  <FloatingLabel label=" Option 3">
-                    <Form.Control type="text" value={props.quizList[props.questionNum-1].optn3} onChange={(e)=>handleChange(e)} name="optn3" />
-                  </FloatingLabel>
-                </div>
-              </Col>
-              <Col md className="m-5 mt-4">
-                <div className="d-flex align-items-center">
-                  <div className="m-3">
-                    <input
-                      type="radio"
-                      id="optn4"
-                      name="correct"
-                      value="4"
-                     checked={props.quizList?.[props.questionNum-1].correct==="4"}
-                      onChange={(e)=>handleChange(e)}
-                    />
-                  </div>
-                  <FloatingLabel label="Option 4">
-                    <Form.Control type="text"  value={props.quizList[props.questionNum-1].optn4} onChange={(e)=>handleChange(e)} name="optn4" />
-                  </FloatingLabel>
-                </div>
-              </Col>
-            </Row>
-          </FormGroup>
-          </div>
-          {/* <button className='btn btn-primary'>Save</button> */}
-         
-        </Form>
-        // </div>
-    // </div>
-  )
+  const handleAddMoreOption=()=>{
+    // props.setError({});
+    props.setFillAllOption(false)
+    const list = [...props.quizList];
+    for(let i=0;i<list[props.questionNum - 1].options.length;i++){
+      if(list[props.questionNum - 1].options[i].length==0){
+        props.setFillAllOption(true);
+        return;
+      }
+    }
+    if(list[props.questionNum - 1].options.length==3){
+      setOptionButtonDisabled(true);
+    }
+    list[props.questionNum - 1].options.push('');
+    props.setQuizList(list);
+  }
+const handleDeleteOption=(index)=>{
+const list=[...props.quizList];
+let tempErr=[...props.error];
+tempErr[props.questionNum - 1]={};
+props.setError(tempErr);
+list[props.questionNum-1].options.splice(index,1);
+props.setQuizList(list);
+setOptionButtonDisabled(false);
 }
 
-export default SingleAnsQuiz
+const handleDeleteQuestion=(index)=>{
+  const list=[...props.quizList];
+  list.splice(index,1);
+  props.setQuizList(list)
+}
+useEffect(() => {
+  
+console.log(props.error)
+ 
+}, [props.error])
+
+  return (
+    
+    <Form className="">
+   
+        <br />
+        <div className="d-flex justify-content-end">
+         <h6 className="p-1"> Question {props.questionNum} </h6>
+         <div className="ms-2"> <DeleteIcon sx={{color:brown[300]}}  className="deleteButton" onClick={()=>handleDeleteQuestion(props.questionNum-1)}/></div>
+        </div>
+        <Form.Group>
+          <FloatingLabel label="Add a Question">
+            <Form.Control
+              type="text"
+              name="question"
+              className={`${props.error?.[props.questionNum-1]?.questionError?"inputControlError":""}`}
+               value={props.quizList[props.questionNum - 1].question}
+              placeholder="Type a question..."
+              onChange={(e) => handleChange(e)}
+            />
+        {props.error?.[props.questionNum-1]?.questionError?<h6 className="text-danger ms-1 ">{props.error?.[props.questionNum-1].questionError}</h6>:""}
+          </FloatingLabel>
+        </Form.Group>
+        <div className="optionContainer">
+         {props.quizList[props.questionNum-1].options.map((option,index)=>
+         <div className="optionRow" key={index}>
+           <FormGroup>
+           <div className="d-flex justify-content-between mx-1"> 
+              <div>
+              <input
+                type="radio"
+                id={index+1}
+                name="correct"
+                value={index+1}
+                onChange={(e) => handleChange(e)}
+                checked={
+                  props.quizList?.[props.questionNum - 1].correct == (index+1)
+                }
+              /> 
+              <label><h6 className="m-1">  Option {index+1}{" "} </h6> </label></div>
+              <div className="deleteButton"><DeleteIcon fontSize="sm"  onClick={()=>handleDeleteOption(index)} /></div>
+              </div>
+              <Form.Control
+                size="lg"
+                type="text"
+                value={option}
+                className={`${props.error?.[props.questionNum-1]?.fillAllOption && option.length==0?"inputControlError":""}`}
+                onChange={(e) => handleOptionChange(e)} 
+                name={index+1}
+              />
+   {props.error?.[props.questionNum-1]?.fillAllOption &&option.length==0?<h6 className="text-danger text-center">{props.error?.[props.questionNum-1].fillAllOption}</h6>:""}
+           </FormGroup>
+           </div>
+         )}
+         </div>
+         {props.error?.[props.questionNum-1]?.fillCorrect?<h6 className="text-danger text-center">{props.error?.[props.questionNum-1].fillCorrect}</h6>:""}
+         {props.error?.[props.questionNum-1]?.mustFill?<h6 className="text-danger text-center">{props.error?.[props.questionNum-1].mustFill}</h6>:""}
+        
+        
+         <button className="btn btn-light ms-3 " type="button" onClick={()=>handleAddMoreOption()} disabled={optionButtonDisabled}> Add <AddCircleIcon sx={{color:green[300]}}/> </button>
+         {props.fillAllOption?<h6 className="text-danger ms-3"> First fill the above options!</h6>:""}
+         </Form>
+            
+   
+  
+  );
+}
+
+export default SingleAnsQuiz;

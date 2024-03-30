@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import QuizResult from "./QuizResult";
-import { BsPatchQuestionFill } from "react-icons/bs";
-import { FaQuestionCircle } from "react-icons/fa";
 import StartQuizSVG from "./startQuiz.svg";
 
-function PlayQuiz() {
+
+function PlayQuiz(props) {
   const [quizList, setQuizList] = useState([]);
   const [playerName, setPlayerName] = useState("");
   const [chosenCatagoryIndex, setChosenCatagoryIndex] = useState(-1);
@@ -33,6 +32,7 @@ function PlayQuiz() {
     if (!err) {
       setError(false);
       setPlayQuiz(true);
+      props.setPlayerName(playerName)
     }
   };
   const handleChosenCatagoryIndex = (i) => {
@@ -61,6 +61,7 @@ function PlayQuiz() {
     setScore(updatedScore);
   };
   const handleSubmit = () => {
+    console.log(score)
     let res = 0;
     for (let i = 0; i < score.length; i++) {
       if (quizArray[i].correct == score[i]) {
@@ -81,7 +82,9 @@ function PlayQuiz() {
         <QuizResult
           result={result}
           questionLen={quizArray.length}
-          playerName={playerName}
+          playerName={props.playerName}
+          setPlayerName={props.setPlayerName}
+          setShowResult={setShowResult}
         />
       ) : (
         <div>
@@ -107,7 +110,7 @@ function PlayQuiz() {
                             onClick={() => handleChosenCatagoryIndex(index)}
                           >
                             {" "}
-                            <h4 className="text-muted">{item.title}</h4>
+                            <h4 className="text-muted text-center">{item.title}</h4>
                           </div>
                         </div>
                       )
@@ -116,16 +119,19 @@ function PlayQuiz() {
                 </div>
               </div>
             ) : (
-              <div className="shadow enterNameCard d-flex justify-content-between">
-                <div className="startQuizImage">
-                  <h3 className="text-muted d-flex">
+              <div className="shadow enterNameCard">
+                 <h3 className="text-muted text-center ">
                     {" "}
-                    <FaQuestionCircle className="me-2" /> Selected Catagory:{" "}
+                    {/* <FaQuestionCircle className="m-0" />  */}
+                    Selected Catagory:{" "}
                     {quizList[chosenCatagoryIndex].title}
                   </h3>
-                  <img src={StartQuizSVG} alt="startquiz"></img>
+                  <p className="text-center">{quizList[chosenCatagoryIndex].description}</p>
+                <div className="nameContainer">
+                <div className="startQuizImage">
+                  <img src={StartQuizSVG} alt="startquiz"/>
                 </div>
-                <div  className="d-flex align-items-center nameForm shadow">
+                <div  className="nameForm shadow">
                   <Form>
                     <Form.Label> <h6>Enter your Name to start the quiz:</h6></Form.Label>
                     <Form.Control
@@ -136,25 +142,25 @@ function PlayQuiz() {
                     />
                     <div>
                       {error && <h6 className=" mt-2 text-danger d-flex flex-wrap">{error}</h6>}
-                      <div className="">
+                      <div className="startQuizButtonDiv ">
                         {" "}
                         <button
-                          className="qButton p-2 mt-4"
+                          className="qButton "
                           onClick={handlePlayerName}
                         >
                           Start Quiz
                         </button>
                       </div>
                     </div>
+                   
                   </Form>
+                </div>
                 </div>
               </div>
             )
           ) : (
-            <div>
-              <h4 className="d-flex justify-content-end me-3 mt-3 text-secondary">
-                {playerName}
-              </h4>
+            <div className="container">
+             
               <div className="quizCard shadow">
                 <div className="d-flex justify-content-between m-0 mb-3 text-muted">
                   <h6>{quizList[chosenCatagoryIndex].title}</h6>
@@ -164,43 +170,19 @@ function PlayQuiz() {
                 </div>
 
                 <h5>{quizArray[currentIndex].question}</h5>
-                <div
+                {quizArray[currentIndex].options.map((option,index)=>
+               
+                  <div
                   className={`optionDiv ${
-                    score[currentIndex] === "1" ? "ansDiv" : ""
+                    score[currentIndex] === index+1 ? "ansDiv" : ""
                   }`}
                 >
-                  {" "}
-                  <h6 onClick={() => handleScore("1", currentIndex)}>
-                    {quizArray[currentIndex].optn1}
+                  <h6 onClick={() => handleScore(index+1, currentIndex)}>
+                    {option}
                   </h6>
-                </div>
-                <div
-                  className={`optionDiv ${
-                    score[currentIndex] === "2" ? "ansDiv" : ""
-                  }`}
-                >
-                  <h6 onClick={() => handleScore("2", currentIndex)}>
-                    {quizArray[currentIndex].optn2}
-                  </h6>
-                </div>
-                <div
-                  className={`optionDiv ${
-                    score[currentIndex] === "3" ? "ansDiv" : ""
-                  }`}
-                >
-                  <h6 onClick={() => handleScore("3", currentIndex)}>
-                    {quizArray[currentIndex].optn3}
-                  </h6>
-                </div>
-                <div
-                  className={`optionDiv ${
-                    score[currentIndex] === "4" ? "ansDiv" : ""
-                  }`}
-                >
-                  <h6 onClick={() => handleScore("4", currentIndex)}>
-                    {quizArray[currentIndex].optn4}
-                  </h6>
-                </div>
+                  </div>
+                )}
+
                 <div className="d-flex justify-content-between mt-4 mx-2">
                   <button
                     className="qButton"
@@ -210,13 +192,15 @@ function PlayQuiz() {
                     Prev
                   </button>
                   {currentIndex == quizArray.length - 1 ? (
-                    <button className="qButton" onClick={handleSubmit}>
+                    <button className="qButton" onClick={handleSubmit} disabled={score[currentIndex]===undefined}>
                       Submit
                     </button>
                   ) : (
-                    <button className="qButton" onClick={handleNext}>
+                    <>
+                    <button className="qButton" onClick={handleNext} disabled={score[currentIndex]===undefined}>
                       Next
                     </button>
+                    </>
                   )}
                 </div>
               </div>

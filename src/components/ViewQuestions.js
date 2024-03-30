@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import CloseIcon from '@mui/icons-material/Close';
 
 function ViewQuestions(props) {
 
@@ -13,18 +14,21 @@ function ViewQuestions(props) {
   return (
     <>
     <div className="qstnContainer" onClick={closeCard}></div>
-    <div className="body your-div bg-light shadow p-4">
-      <h3 className='pb-2 text-secondary text-decoration-underline' >{props.title}</h3>
+
+    <div className="body your-div shadow p-4 rounded">
+     
+      <h3 className='pb-4 text-secondary text-decoration-underline text-center text-uppercase' >{props.title}</h3>
+      <h3 className='pointer cross'><CloseIcon fontSize='large' onClick={closeCard}/></h3>
+     
         {props.questions?.map((item,index)=>
-        <div key={index}>   
-      <h5 className='d-flex justify-content-start ms-4'>{index+1}. {item.question}</h5>
-      <div className='d-flex m-3 justify-content-center justify-content-around'>
-      <h6>  <li className={`${item.correct === "1" ? 'text-success' : ''}`}>{item.optn1}</li></h6>
-      <h6><li className={`${item.correct === "2" ? 'text-success' : ''}`}>{item.optn2}</li></h6>
-      <h6><li className={`${item.correct === "3" ? 'text-success' : ''}`}>{item.optn3}</li></h6>
-      <h6>  <li className={`${item.correct === "4" ? 'text-success' : ''}`}>{item.optn4}</li></h6>
-        </div>
-        <hr className='text-danger mx-4'/>
+        <div key={index} className='bg-light shadow rounded m-3 p-1'>   
+      <h5 className='d-flex justify-content-start ms-4 mt-3'>{index+1}. {item.question}</h5>
+      <div className='d-flex   justify-content-around viewQuestionList'>
+      {item.options.map((option,index)=>
+      <h6><li className={`${item.correct == index+1 ? 'text-success fw-bold' : ''}`}>{option}</li></h6> 
+      )}
+      </div>
+
         </div>
         
         )}

@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import {  MdDeleteForever } from "react-icons/md";
+
 import { Table } from "react-bootstrap";
-import { MdOutlineEdit } from "react-icons/md";
+
 import ModalQuiz from "./ModalQuiz";
-import { GrFormView } from "react-icons/gr";
+
 import ViewQuestions from "./ViewQuestions";
 import CreateQuizPage from "./CreateQuizPage";
 import { useNavigate } from "react-router-dom";
-import {Switch} from "antd"
+import DeleteIcon from '@mui/icons-material/Delete';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 function MyQuiz() {
   const [quizList, setQuizList] = useState([]);
@@ -15,7 +17,7 @@ function MyQuiz() {
   const [showQuestionList, setShowQuestionList] = useState(false);
   const [confirmModal, setConfirmModal] = useState(false);
   const [questionToView, setQuestionToView] = useState([]);
-  const [showEditPage, setShowEditPage] = useState(false);
+ const [showEditPage,setShowEditPage]=useState(false)
   const [showEditIndex,setShowEditIndex]=useState(-1);
   const [editQuiz, setEditQuiz] = useState("");
   const [activate,setActivate]=useState(true);
@@ -33,17 +35,15 @@ function MyQuiz() {
       className: "bg-secondary mx-1",
     },
   ];
-
   const handlequizList = () => {
     setQuizList(JSON.parse(localStorage.getItem("question")));
   };
-
   const handleDelete = () => {
+    console.log(quizList)
     quizList.splice(indexToBeDeleted, 1);
     localStorage.setItem("question", JSON.stringify(quizList));
     setConfirmModal(false);
   };
-
   const handleShowQustion = (index) => {
     setShowQuestionList(true);
     setQuestionToView(quizList[index]);
@@ -51,6 +51,7 @@ function MyQuiz() {
   };
   const handleEditQuiz = (quiz, index) => {
     setEditQuiz(quiz);
+    console.log(quiz)
     setShowEditPage(true);
     setShowEditIndex(index)
     console.log(index)
@@ -63,11 +64,12 @@ function MyQuiz() {
     localStorage.setItem('question', JSON.stringify(quizList));
 
   }
+
   useEffect(() => {
     handlequizList();
 },[showEditPage,activate]);
   return (
-    <div className=" w-75 m-auto">
+    <div className=" myQuizContainer">
       {showEditPage ? (
         <CreateQuizPage quiz={editQuiz} setShowEditPage={setShowEditPage} showEditPage={showEditPage} showEditIndex={showEditIndex}/>
       ) : (
@@ -83,18 +85,19 @@ function MyQuiz() {
             <ModalQuiz
               show={confirmModal}
               buttons={buttons}
-              title="Are you sure want to delete?"
+              title={`Are you sure want to delete ${quizList[indexToBeDeleted].title}?`}
               onHide={() => setConfirmModal(false)}
             />
           )}
-          <div className=" my-5 d-flex justify-content-between">
+          <div className=" myQuizHeader">
             <h2>My Quizes</h2>
             <button className="qButton" onClick={()=>navigate("/createquiz")}>Create New Quiz</button>
           </div>
-          <Table className="my-5 shadow border text-center">
-            <thead className="">
-              <tr className="border">
-                <th>Quiz No.</th>
+          <div className="myQuizTableContainer ">
+          <Table className="myQuizTable border">
+            <thead >
+              <tr>
+                <th >Sl.No.</th>
                 <th>Title</th>
                 <th>Status</th>
                 <th>Created At</th>
@@ -105,11 +108,11 @@ function MyQuiz() {
               {quizList.map((quizItem, index) => (
                 <tr className="m-2" key={index}>
                   <td className="bold">{index + 1}</td>
-                  <td>{quizItem.title}</td>
-                  <td>
-                    {" "}
-                    <Switch onClick={()=>handleAnctivation(index)} defaultChecked={quizItem.activate} />
-                  </td>
+                  <td><h6 className="pointer" onClick={() => handleShowQustion(index)}>{quizItem.title}</h6></td>
+             <td className=" form-switch  ps-5">
+              <input class="form-check-input" type="checkbox" role="switch" onChange={()=>handleAnctivation(index)} checked={quizItem.activate}/>
+              </td>    
+
                   <td>{quizItem.createdAt}</td>
                   <td>
                     {" "}
@@ -117,7 +120,7 @@ function MyQuiz() {
                       className="btn"
                       onClick={() => handleEditQuiz(quizItem,index)}
                     >
-                      <MdOutlineEdit className="text-primary" />
+                     <BorderColorIcon fontSize="sm" color="action"/>
                     </button>
                     <button
                       className="btn"
@@ -127,19 +130,20 @@ function MyQuiz() {
                       }}
                     >
                       {" "}
-                      <MdDeleteForever className="text-danger " />
+                      <DeleteIcon fontSize="sm" color="action"/>
                     </button>
                     <button
                       className="btn"
                       onClick={() => handleShowQustion(index)}
                     >
-                      <GrFormView size={20} />
+                      <VisibilityIcon fontSize="sm" color="action"/>
                     </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </Table>
+          </div>
         </>
       )}
     </div>
