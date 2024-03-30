@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import QuizResult from "./QuizResult";
-import StartQuizSVG from "./startQuiz.svg";
+import StartQuizSVG from "./assets/startQuiz.svg";
 
 
 function PlayQuiz(props) {

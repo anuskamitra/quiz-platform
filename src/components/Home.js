@@ -1,9 +1,9 @@
 import React from 'react'
 import Card from './Card'
 import { useNavigate } from 'react-router-dom'
-import StartQuizSVG from "./startQuiz.svg";
-import QuizListSVG from "./quizList.svg"
-import PlayQuiz from "./playQuiz.svg"
+import StartQuizSVG from "./assets/startQuiz.svg";
+import QuizListSVG from "./assets/quizList.svg"
+import PlayQuiz from "./assets/playQuiz.svg"
 
 function Home() {
     const navigate=useNavigate();

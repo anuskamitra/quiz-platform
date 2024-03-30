@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import CongoCSV from "./congo.svg";
-import SorryCSV from "./sorry.svg";
+import CongoCSV from "./assets/congo.svg";
+import SorryCSV from "./assets/sorry.svg";
 import { useNavigate } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
-import { Close } from "@mui/icons-material";
+
 
 function QuizResult(props) {
   const navigate = useNavigate();
