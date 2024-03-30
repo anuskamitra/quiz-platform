@@ -19,7 +19,7 @@ function PlayQuiz(props) {
 
   const handlequizList = () => {
   let quizArr=(JSON.parse(localStorage.getItem("question")));
-  quizArr=quizArr.filter(quiz=>quiz.activate==true);
+  quizArr=quizArr?.filter(quiz=>quiz.activate==true);
   setQuizList(quizArr)
     
   };
