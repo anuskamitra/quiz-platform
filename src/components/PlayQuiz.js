@@ -93,7 +93,7 @@ function PlayQuiz(props) {
           {!playQuiz ? (
             chosenCatagoryIndex == -1 ? (
               <div className="catagoryDiv">
-                <h3 className="text-muted text-center">Available Catagories</h3>
+                {quizList.length>0?<><h3 className="text-muted text-center">Available Catagories</h3>
                 <h6 className="text-secondary text-center ">
                   Choose any one catagory to play
                 </h6>
@@ -115,8 +115,10 @@ function PlayQuiz(props) {
                         </div>
                       )
                     );
-                  })}
+                  })
+                }
                 </div>
+                </>:<h2 className="text-center text-danger">Create alteast one Quiz first!!</h2>}
               </div>
             ) : (
               <div className="shadow enterNameCard">

@@ -89,6 +89,8 @@ function MyQuiz() {
               onHide={() => setConfirmModal(false)}
             />
           )}
+           
+           {quizList.length>0?<>
           <div className=" myQuizHeader">
             <h2>My Quizes</h2>
             <button className="qButton" onClick={()=>navigate("/createquiz")}>Create New Quiz</button>
@@ -144,8 +146,11 @@ function MyQuiz() {
             </tbody>
           </Table>
           </div>
+          </>:<h3 className="text-center p-2 text-danger">No Quiz is created yet!</h3>}
         </>
+       
       )}
+      
     </div>
   );
 }
