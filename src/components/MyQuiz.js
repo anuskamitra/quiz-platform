@@ -90,7 +90,7 @@ function MyQuiz() {
             />
           )}
            
-           {quizList.length>0?<>
+           {quizList?.length>0?<>
           <div className=" myQuizHeader">
             <h2>My Quizes</h2>
             <button className="qButton" onClick={()=>navigate("/createquiz")}>Create New Quiz</button>

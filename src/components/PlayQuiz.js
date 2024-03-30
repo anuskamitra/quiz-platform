@@ -93,7 +93,7 @@ function PlayQuiz(props) {
           {!playQuiz ? (
             chosenCatagoryIndex == -1 ? (
               <div className="catagoryDiv">
-                {quizList.length>0?<><h3 className="text-muted text-center">Available Catagories</h3>
+                {quizList?.length>0?<><h3 className="text-muted text-center">Available Catagories</h3>
                 <h6 className="text-secondary text-center ">
                   Choose any one catagory to play
                 </h6>
