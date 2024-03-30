@@ -8,7 +8,7 @@ function NavbarQuiz(props) {
    <div>
     <Navbar className='navbar'>
         <Container>
-          <Navbar.Brand href="#home">QP</Navbar.Brand>
+          <Navbar.Brand href="#home">QH</Navbar.Brand>
           <Nav className="ml-auto">
           <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/myquiz">My Quiz</Nav.Link>
