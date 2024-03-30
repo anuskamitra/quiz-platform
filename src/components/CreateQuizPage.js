@@ -403,7 +403,7 @@ const navigate=useNavigate()
                         ${
                         Object.keys(error[index])?.length !== 0
                           ? "errorCard"
-                          : "shadow"
+                          : ""
                       }
                       `}
                     >

@@ -50,7 +50,7 @@ code {
   margin: 3rem auto;
   background: rgb(231, 235, 231);
   width: 65%;
-  box-shadow: 2px 2px 2px 2px rgb(223, 221, 221);
+  box-shadow: 2px 2px 2px rgba(120, 119, 119, 0.5) 
 
 }
 
@@ -104,6 +104,7 @@ code {
   border-radius: 1rem;
   display: flex;
   justify-content: center;
+  box-shadow: 2px 2px 2px rgba(120, 119, 119, 0.5) ;
 }
 
 .catagoryDiv {
@@ -112,6 +113,7 @@ code {
   padding: 2rem 1rem;
   margin: 6rem auto ;
   border-radius: 1rem;
+  box-shadow: 2px 2px 2px rgba(120, 119, 119, 0.5) ;
 
 }
 
@@ -200,6 +202,7 @@ code {
   border-radius: 1rem;
   margin: 4rem auto 1rem auto ;
   width:65% ;
+  box-shadow: 2px 2px 2px rgba(120, 119, 119, 0.5) ;
   
 }
 
@@ -232,6 +235,7 @@ code {
   display: flex;
   /* justify-content: center; */
   align-items: center;
+  box-shadow: 2px 2px 2px 2px rgba(120, 119, 119, 0.5) ;
 }
 .myQuizTableContainer{ 
   overflow-x: auto;
@@ -280,7 +284,9 @@ td {
   background: rgb(195, 241, 166) ;
   color: rgb(117, 115, 115);
   padding: 1rem;
+  box-shadow: 2px 2px 2px 2px rgba(120, 119, 119, 0.5) ;
   margin: auto 5rem;
+ 
 }
 
 .createQuizButton {
@@ -332,6 +338,15 @@ td {
   top:0;
   right:0;
   padding: 1rem;
+}
+.myQuizContainer{
+  background: rgb(231, 235, 231) ;
+  width: 95%;
+  padding: 1rem 0rem;
+  margin: 2rem auto ;
+  border-radius: 1rem;
+  box-shadow: 2px 2px 2px rgba(120, 119, 119, 0.5) ;
+
 }
 @media screen and (max-width: 860px) {
   .enterNameCard{

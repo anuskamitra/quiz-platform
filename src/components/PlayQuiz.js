@@ -18,7 +18,10 @@ function PlayQuiz(props) {
   // const [ansArr,setAnsArr]=useState([]);
 
   const handlequizList = () => {
-    setQuizList(JSON.parse(localStorage.getItem("question")));
+  let quizArr=(JSON.parse(localStorage.getItem("question")));
+  quizArr=quizArr.filter(quiz=>quiz.activate==true);
+  setQuizList(quizArr)
+    
   };
 
   const handlePlayerName = (e) => {
@@ -100,28 +103,27 @@ function PlayQuiz(props) {
                 <div>
                   {quizList.map((item, index) => {
                     return (
-                      item.activate === true && (
                         <div
                           className="m-5 d-flex justify-content-center"
                           key={item.title}
                         >
                           <div
-                            className="shadow catagoryListCard d-flex justify-content-center align-items-center "
+                            className="catagoryListCard d-flex justify-content-center align-items-center "
                             onClick={() => handleChosenCatagoryIndex(index)}
                           >
                             {" "}
                             <h4 className="text-muted text-center">{item.title}</h4>
                           </div>
                         </div>
-                      )
+                      
                     );
                   })
                 }
                 </div>
-                </>:<h2 className="text-center text-danger">Create alteast one Quiz first!!</h2>}
+                </>:<h2 className="text-center text-danger">No catagory to show</h2>}
               </div>
             ) : (
-              <div className="shadow enterNameCard">
+              <div className=" enterNameCard">
                  <h3 className="text-muted text-center ">
                     {" "}
                     {/* <FaQuestionCircle className="m-0" />  */}
@@ -133,7 +135,7 @@ function PlayQuiz(props) {
                 <div className="startQuizImage">
                   <img src={StartQuizSVG} alt="startquiz"/>
                 </div>
-                <div  className="nameForm shadow">
+                <div  className="nameForm">
                   <Form>
                     <Form.Label> <h6>Enter your Name to start the quiz:</h6></Form.Label>
                     <Form.Control
