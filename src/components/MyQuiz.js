@@ -137,7 +137,7 @@ function MyQuiz() {
                         </td>
                         <td className=" form-switch  ps-5">
                           <input
-                            class="form-check-input"
+                            className="form-check-input"
                             type="checkbox"
                             role="switch"
                             onChange={() => handleActivation(index)}

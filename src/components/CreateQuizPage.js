@@ -494,7 +494,6 @@ function CreateQuizPage(props) {
                     show={qstnStored}
                     onHide={handleHide}
                     title="Question submitted successfully!"
-                    showAll={handleShowAll}
                     buttons={buttons}
                   />
                 )}
