@@ -1,9 +1,9 @@
+// MyQuiz component will show a table of quizlist user made, the table will have quiztitle,ative/deactive button,
+//creation time of the quiz and action buttons like delete update and view.
+
 import React, { useEffect, useState } from "react";
-
 import { Table } from "react-bootstrap";
-
 import ModalQuiz from "./ModalQuiz";
-
 import ViewQuestions from "./ViewQuestions";
 import CreateQuizPage from "./CreateQuizPage";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +23,7 @@ function MyQuiz() {
   const [activate, setActivate] = useState(true);
   const navigate = useNavigate();
 
+  // buttons array will be sent to the ModalQuiz component to show buttons in the modal.
   const buttons = [
     {
       text: "Delete",
@@ -35,31 +36,37 @@ function MyQuiz() {
       className: "bg-secondary mx-1",
     },
   ];
+
+  // handleQuizList will store the quiz from the localstorage to quizList.
   const handlequizList = () => {
     setQuizList(JSON.parse(localStorage.getItem("question")));
   };
+
+// handleDelete will delete any quiz which user has made, i.e the quiz will be deleted from localstorage
   const handleDelete = () => {
-    console.log(quizList);
     quizList.splice(indexToBeDeleted, 1);
     localStorage.setItem("question", JSON.stringify(quizList));
     setConfirmModal(false);
   };
+
+  // HandleShowQuestion will take the index of the quiz user want to show so that that quiz's question can be shown.
   const handleShowQustion = (index) => {
     setShowQuestionList(true);
     setQuestionToView(quizList[index]);
-    console.log(quizList[index]);
+   
   };
+
+  // handleEditQuiz will open the form with all the questions for a particular quiz in a editable way.
   const handleEditQuiz = (quiz, index) => {
     setEditQuiz(quiz);
-    console.log(quiz);
     setShowEditPage(true);
     setShowEditIndex(index);
-    console.log(index);
+  
   };
-  const handleAnctivation = (index) => {
+
+  // handleActivation is used to update the status of any quiz from active to deactive and vice-versa,
+  const handleActivation = (index) => {
     setActivate(!activate);
-    console.log(index);
-    console.log(quizList[index]);
     quizList[index].activate = !quizList[index].activate;
     localStorage.setItem("question", JSON.stringify(quizList));
   };
@@ -133,7 +140,7 @@ function MyQuiz() {
                             class="form-check-input"
                             type="checkbox"
                             role="switch"
-                            onChange={() => handleAnctivation(index)}
+                            onChange={() => handleActivation(index)}
                             checked={quizItem.activate}
                           />
                         </td>

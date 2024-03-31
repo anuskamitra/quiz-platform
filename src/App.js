@@ -1,3 +1,4 @@
+//In App.js react-router-dom is used to create three pages which are home,myQuiz and play 
 import "./App.css";
 import NavbarQuiz from "./components/NavbarQuiz";
 import Home from "./components/Home";
@@ -10,6 +11,7 @@ import PlayQuiz from "./components/PlayQuiz";
 import { useState } from "react";
 
 function App() {
+  //playerName will be used to show the player name in navigation bar.
   const[playerName,setPlayerName]=useState("");
   return ( 
     <div >

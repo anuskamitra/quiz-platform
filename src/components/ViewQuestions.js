@@ -1,3 +1,5 @@
+// ViewQuestion component is used to show the question list of a particular quiz.
+
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import CloseIcon from '@mui/icons-material/Close';

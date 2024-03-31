@@ -1,16 +1,17 @@
+//CreateQuizPage component will provide user the form where user can create a quiz.
+
 import React, { useState, useEffect } from "react";
 import ModalQuiz from "./ModalQuiz";
 import SingleAnsQuiz from "./SingleAnsQuiz";
 import ViewQuestions from "./ViewQuestions";
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
-
 
 function CreateQuizPage(props) {
   const [fillAllOption, setFillAllOption] = useState(false);
   const [modalShow, setModalShow] = useState(true);
-  const [quizHeader, setQuizHeader] = useState({title:"",description:""});
+  const [quizHeader, setQuizHeader] = useState({ title: "", description: "" });
   const [singleAnsMcq, setSingleAnsMcq] = useState(true);
   const [qstnStored, setQstnStored] = useState(false);
   const [showQstn, setShowQstn] = useState(false);
@@ -20,7 +21,8 @@ function CreateQuizPage(props) {
   const [quizList, setQuizList] = useState([
     { question: "", options: ["", ""], correct: "" },
   ]);
-const navigate=useNavigate()
+  const navigate = useNavigate();
+
   const buttons = [
     {
       text: "Show All",
@@ -63,17 +65,21 @@ const navigate=useNavigate()
     "Dec",
   ];
 
+ //handleSingleAnsQuiz will be called when user will choose single Answer quiz from the modal. 
   const handleSingleAnsQuiz = () => {
     setModalShow(false);
     setSingleAnsMcq(true);
   };
 
+ //handleHide function is used to hide the modal.
   const handleHide = () => {
     setModalShow(false);
     setQstnStored(false);
-    navigate("/")
-   
+    navigate("/");
   };
+
+  // handlequizList will be called when user will click "Add" button to add a new question, 
+  // Here first authentication will be done to check is user is eligible to add another question
   const handlequizList = () => {
     let err = false;
     const list = [...quizList];
@@ -138,10 +144,10 @@ const navigate=useNavigate()
     }
   };
   let err = false;
-
+//handleStore will be called when user will click the submit button to store the quiz in localstorage.
+//Here some authentication will be done and then the quiz will be stored in localstorage.
   const handleStore = (e) => {
     e.preventDefault();
-    console.log(quizList);
     err = false;
 
     const list = [...quizList];
@@ -214,16 +220,17 @@ const navigate=useNavigate()
       }
       const createdAt =
         day + " " + monthArr[month] + ", " + hour + ":" + min + " " + format;
-      console.log(createdAt);
 
+// quiz object will be pushed to the storedData array.
       let quiz = {
         activate: activate,
         createdAt: createdAt,
         title: quizHeader.title,
-        description:quizHeader.description,
+        description: quizHeader.description,
         quizList: quizList,
       };
-       console.log(quiz)
+      
+      //localstorage.getItem() is used to get the data from localstorage
       let storedData = JSON.parse(localStorage.getItem("question"));
       if (!Array.isArray(storedData)) {
         storedData = [];
@@ -231,11 +238,10 @@ const navigate=useNavigate()
       storedData.push(quiz);
       localStorage.setItem("question", JSON.stringify(storedData));
       setQstnStored(true);
-      console.log(quizList);
     }
   };
+// handleUpdateStore will be called when user will update a quiz.
   const handleUpdateStore = () => {
-    console.log(quizList);
     err = false;
 
     const list = [...quizList];
@@ -299,38 +305,47 @@ const navigate=useNavigate()
     if (!err) {
       let storedData = JSON.parse(localStorage.getItem("question"));
       storedData[props.showEditIndex].quizList = quizList;
-      console.log(storedData[props.showEditIndex])
-      storedData[props.showEditIndex].title=quizHeader?.title
-      storedData[props.showEditIndex].description=quizHeader.description
+      storedData[props.showEditIndex].title = quizHeader?.title;
+      storedData[props.showEditIndex].description = quizHeader.description;
       localStorage.setItem("question", JSON.stringify(storedData));
       setQstnStored(true);
     }
   };
+
+// When user will submit a quiz successfully one popup will come there user can see the list of 
+// the questions, to show the list handleShowAll method will be called.
   const handleShowAll = () => {
     setShowQstn(true);
   };
+
   useEffect(() => {
     if (props?.quiz) {
       setQuizList(props.quiz.quizList);
-      setQuizHeader(prev=>({title:props.quiz.title,description:props.quiz.description?props.quiz.description:""}));
-      let temp=[...error]
-      for(let i=1;i<props.quiz.quizList.length;i++){
-            temp[i]={};
+      setQuizHeader((prev) => ({
+        title: props.quiz.title,
+        description: props.quiz.description ? props.quiz.description : "",
+      }));
+      let temp = [...error];
+      for (let i = 1; i < props.quiz.quizList.length; i++) {
+        temp[i] = {};
       }
-      console.log(temp);
-      setError(temp)
+    
+      setError(temp);
     }
   }, []);
 
   return (
     <div>
-      {!props.showEditPage && <ModalQuiz
-        buttons={quizTypeButton}
-        show={modalShow}
-        onHide={handleSingleAnsQuiz}
-        title="Select Question Type"
-        centered="centered"
-      />}
+      {/*  Modal will pop up only when the user is creating a quiz not when user is Editing a particular quiz */}
+      {!props.showEditPage && (
+        <ModalQuiz
+          buttons={quizTypeButton}
+          show={modalShow}
+          onHide={handleSingleAnsQuiz}
+          title="Select Question Type"
+          centered="centered"
+        />
+      )}
       {showQstn ? (
         <ViewQuestions
           questions={quizList}
@@ -341,6 +356,8 @@ const navigate=useNavigate()
       ) : (
         <>
           <div>
+            {/* when user will choose single answer Mcq the state of 
+            singleAnsMcq will be true and this div will be shown. */}
             {singleAnsMcq && (
               <div
                 className={`d-flex flex-column  p-3 rounded singleQuizContainer ${
@@ -361,54 +378,53 @@ const navigate=useNavigate()
                           placeholder="Add a Title..."
                           value={quizHeader.title}
                           onChange={(event) => {
-                            setQuizHeader(prev=>({...prev,title:event.target.value}));
+                            setQuizHeader((prev) => ({
+                              ...prev,
+                              title: event.target.value,
+                            }));
                             setTitleError("");
                           }}
                           className={`${titleError ? "errorCard" : ""}`}
                         />
                       </FloatingLabel>
-                      <FloatingLabel label="Description" className="mt-2">
-                        <Form.Control
-                          as="textarea"
-                          style={{
-                            height: '100px'
-                          }}
-                          value={quizHeader.description}
-                          onChange={(event) => {
-                            setQuizHeader(prev=>({...prev,description:event.target.value}));
-                            setTitleError("");
-                          }}
-                           
-                        />
-                      </FloatingLabel>
-
-                    
-                      
                       {titleError ? (
                         <h6 className="text-danger m-1">{titleError}</h6>
                       ) : (
                         ""
                       )}
+                      <FloatingLabel label="Description" className="mt-2">
+                        <Form.Control
+                          as="textarea"
+                          style={{
+                            height: "100px",
+                          }}
+                          value={quizHeader.description}
+                          onChange={(event) => {
+                            setQuizHeader((prev) => ({
+                              ...prev,
+                              description: event.target.value,
+                            }));
+                            setTitleError("");
+                          }}
+                        />
+                      </FloatingLabel>
+
+                     
                     </Form.Group>
                   </div>
-                  
+
                   {quizList?.map((item, index) => (
-                    
                     <div
-                  
                       key={index}
-                   
                       className={`rounded  mt-5 singleQuizCard 
 
                         ${
-                        Object.keys(error[index])?.length !== 0
-                          ? "errorCard"
-                          : ""
-                      }
+                          Object.keys(error[index])?.length !== 0
+                            ? "errorCard"
+                            : ""
+                        }
                       `}
                     >
-                    
-                      
                       <SingleAnsQuiz
                         questionNum={index + 1}
                         setQuizList={setQuizList}

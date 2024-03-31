@@ -1,3 +1,5 @@
+// In QuizResult component it will check if the user is passed 
+// or failed and according to that the result will be shown.
 import React, { useEffect, useState } from "react";
 import CongoCSV from "./assets/congo.svg";
 import SorryCSV from "./assets/sorry.svg";
@@ -12,8 +14,11 @@ function QuizResult(props) {
     props.setPlayerName("");
     navigate("/");
   };
+
+  // in useEffect if the user is passed or failed 
+  // that will be evaluated and will set the state of pass to true or false.
   useEffect(() => {
-    if (Math.round((props.result / (props.questionLen * 5)) * 100) < 60) {
+    if (Math.round((props.result / (props.questionLen )) * 100) < 60) {
       setPass(false);
     }
   }, []);
@@ -38,12 +43,12 @@ function QuizResult(props) {
           </h2>
           <h2 className="text-center">
             {" "}
-            You got {props.result} out of {props.questionLen * 5}!
+            You got {props.result} out of {props.questionLen}!
           </h2>
           {pass ? (
             <h6 className="text-center text-secondary">
               You passed the exam with{" "}
-              {Math.round((props.result / (props.questionLen * 5)) * 100)}%
+              {Math.round((props.result / (props.questionLen)) * 100)}%
             </h6>
           ) : (
             <h6 className="text-center text-danger">

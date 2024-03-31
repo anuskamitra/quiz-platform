@@ -1,3 +1,6 @@
+// PlayQuiz Component will show the available Categories,
+//  after choosing one category user have to input name, then user can play the quiz
+
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import QuizResult from "./QuizResult";
@@ -15,8 +18,10 @@ function PlayQuiz(props) {
   const [result, setResult] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [error, setError] = useState("");
-  // const [ansArr,setAnsArr]=useState([]);
+ 
 
+// handleQuizList will fetch all the quizes are stored in the localstorage,
+// then it will filter only the active quizes as inactive quizes are cannot be played.
   const handlequizList = () => {
   let quizArr=(JSON.parse(localStorage.getItem("question")));
   quizArr=quizArr?.filter(quiz=>quiz.activate==true);
@@ -24,12 +29,19 @@ function PlayQuiz(props) {
     
   };
 
+   // handleChosenCatagoryIndex will set the chosen category so that question from this 
+  //  category can be shown in play time.
+  const handleChosenCatagoryIndex = (i) => {
+    setChosenCatagoryIndex(i);
+    setQuizArray(quizList[i].quizList);
+  };
+// handlePlayerName will set the playerName so that it can be shown in the navbar.
   const handlePlayerName = (e) => {
     e.preventDefault();
 
     let err = false;
-    if (playerName.length < 5 || playerName.length > 20) {
-      setError("Player name should be in 5 to 20 characters!");
+    if (playerName.length < 5 || playerName.length > 50) {
+      setError("Player name should be in 5 to 50 characters!");
       err = true;
     }
     if (!err) {
@@ -38,45 +50,53 @@ function PlayQuiz(props) {
       props.setPlayerName(playerName)
     }
   };
-  const handleChosenCatagoryIndex = (i) => {
-    setChosenCatagoryIndex(i);
-    setQuizArray(quizList[i].quizList);
-  };
-  const handleNext = (e) => {
-    e.preventDefault();
-    if (currentIndex == quizList[chosenCatagoryIndex].quizList.length - 1) {
-      console.log("end");
-    } else {
-      setCurrentIndex((prev) => prev + 1);
-    }
-  };
-  const handlePrev = (e) => {
-    e.preventDefault();
-    if (currentIndex == 0) {
-      console.log("start");
-    } else {
-      setCurrentIndex((prev) => prev - 1);
-    }
-  };
+  // handleScore will keep tract of which option is marked for a question.
   const handleScore = (ans, index) => {
     const updatedScore = [...score];
     updatedScore[index] = ans;
     setScore(updatedScore);
   };
+  // handleNext button will show the next question of the quiz in play time.
+  const handleNext = (e) => {
+    e.preventDefault();
+    if (currentIndex == quizList[chosenCatagoryIndex].quizList.length - 1) {
+     
+    } else {
+      setCurrentIndex((prev) => prev + 1);
+    }
+  };
+  
+  // handleNext button will show the next question of the quiz in play time. 
+  const handlePrev = (e) => {
+    e.preventDefault();
+    if (currentIndex == 0) {
+     
+    } else {
+      setCurrentIndex((prev) => prev - 1);
+    }
+  };
+
+  // handleSubmit will submit the quiz, and evaluate the result,and set the showResult state 
+  // true so that user can see the result.
   const handleSubmit = () => {
-    console.log(score)
     let res = 0;
     for (let i = 0; i < score.length; i++) {
       if (quizArray[i].correct == score[i]) {
-        res += 5;
+        res += 1;
       }
       setResult(res);
       setShowResult(true);
     }
   };
 
+  
+  
+ 
+
   useEffect(() => {
     handlequizList();
+    props.setPlayerName("");
+    setPlayerName("");
   }, []);
 
   return (
@@ -92,13 +112,12 @@ function PlayQuiz(props) {
       ) : (
         <div>
           {" "}
-          {/* <h2>Wellcome to QuizPlatform</h2> */}
           {!playQuiz ? (
             chosenCatagoryIndex == -1 ? (
               <div className="catagoryDiv">
-                {quizList?.length>0?<><h3 className="text-muted text-center">Available Catagories</h3>
+                {quizList?.length>0?<><h3 className="text-muted text-center">Available Categories</h3>
                 <h6 className="text-secondary text-center ">
-                  Choose any one catagory to play
+                  Choose any one category to play
                 </h6>
                 <div>
                   {quizList.map((item, index) => {
@@ -120,13 +139,12 @@ function PlayQuiz(props) {
                   })
                 }
                 </div>
-                </>:<h2 className="text-center text-danger">No catagory to show</h2>}
+                </>:<h2 className="text-center text-danger">No category to show</h2>}
               </div>
             ) : (
               <div className=" enterNameCard">
                  <h3 className="text-muted text-center ">
                     {" "}
-                    {/* <FaQuestionCircle className="m-0" />  */}
                     Selected Catagory:{" "}
                     {quizList[chosenCatagoryIndex].title}
                   </h3>
