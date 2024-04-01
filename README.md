@@ -24,7 +24,7 @@
 - Customize the correct answer for each question and click "Add" to add more questions.
 - Submit the quiz to save it in local storage.
 - View and manage your quizzes in the "My Quizzes" section.
-- Play quizzes in the "Play Quiz" section by selecting a category and providing your name.
-- Answer quiz questions and receive instant feedback on your performance.
+- Play quizzes in the "Play Quiz" section by selecting a category and providing full name.
+- Answer quiz questions and receive instant feedback on performance.
 
 
