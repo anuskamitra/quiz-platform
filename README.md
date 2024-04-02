@@ -3,6 +3,9 @@
  Quizz Hut is a web application built using React.js that provides a platform for creating, managing, and participating in quizzes. It offers a wonderful user interface for users to 
  create quizzes and for users to engage in interactive quiz experiences.
 
+### Live link
+  https://quizzhut.netlify.app
+
 ### Features
 
 - Quiz Creation: Educators can easily create quizzes with customizable questions, options, and correct answers.
